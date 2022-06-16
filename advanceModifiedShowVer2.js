@@ -1,6 +1,10 @@
-//years and goals of the player is mentioned here
-const goals=[{1910:[0,0,0,0]},{1930:[30, 20, 40, 50]},{1935:[35, 40, 70, 60]},{1950:[50,75,72,73]},{1955:[108, 76, 72, 79]},{1960:[110,100,108,106]},{1975:[120,110,117,112]},{1976:[130, 120, 140, 150]},{1990:[285, 250, 270, 210]},{2000:[285,325,372,353]}];
 
+//const goals=[{1910:[0,0,0,0]},{1930:[30, 20, 40, 50]},{1935:[35, 40, 70, 60]},{1950:[50,75,72,73]},{1955:[108, 76, 72, 79]},{1960:[110,100,108,106]},{1975:[120,110,117,112]},{1976:[130, 120, 140, 150]},{1990:[285, 250, 270, 210]},{2000:[285,325,372,353]}];
+
+
+
+//years and goals of the player is mentioned here
+const goals=[{1910:[0,0,0,0]},{1930:[30, 20, 40, 50]},{1935:[35, 40, 70, 60]},{1950:[50,75,72,73]},{1955:[70, 76, 72, 79]},{1960:[110,100,108,106]},{1975:[120,120,117,112]},{1986:[130, 120, 117, 150]},{1990:[185, 120, 117, 210]},{2000:[208,120,117,225]}];
 
 
 //name of the plaer is mentioned here
@@ -189,12 +193,10 @@ var svgTextLineLocator=initial;
 
 
 //on which user thought of seeing who reached the data first
-//var userFirstStartingData=parseInt(window.prompt("Enter starting value for animation"));
-var userFirstStartingData=50;
+var userFirstStartingData=parseInt(window.prompt("Enter starting value for animation"));
 
 //this is for regular interval 
-//var userIntervalData=parseInt(window.prompt("on what interval you want to graph to be plotted"));
-var userIntervalData=50;
+var userIntervalData=parseInt(window.prompt("on what interval you want to graph to be plotted"));
 
 var lastHighestGoal=Object.values(goals[goals.length-1])[initial].sort((a,b)=> b-a)[initial];
 
@@ -246,13 +248,9 @@ $(playersPositionG[initial]).animate
                     {
                         var forConversion=wholeForEachYear[i-1]?wholeForEachYear[i-1]:initial;
                         
-                        
                         var dif=wholeForEachYear[i]-forConversion;
-                       
                         
                         currTotalForEachPlayers[j] = parseFloat(allYearGoalData[i][j])+(parseFloat(DiffBtwGoalsOnConsecutiveYears[i][j])*((now-forConversion)/dif));
-
-                     //   console.log("now",now,typeof(now),"forConversion",forConversion,typeof(forConversion),"now-forConversion",now-forConversion,typeof(now-forConversion),"(now-forConversion)/dif",(now-forConversion)/dif,typeof((now-forConversion)/dif));
                         
                         if(currTotalForEachPlayers[j]>=userFirstStartingData){distribution=1}
                     }
@@ -262,55 +260,10 @@ $(playersPositionG[initial]).animate
 
                      let indexData = [];
 
-                    // console.log("currtotalforeachplayers",currTotalForEachPlayers);
-                    //  console.log("copy",copy1); 
-
-                     for (let j = initial; j < copy1.length; j++){   
-                      //                                              curr[5,1,1,1]  copy[1,1,1,5]  id[1,2,3,0]
-                      //                                                     [1,1,1]        j      
-                      //                                                       [1,1]
-                      //                                                         [1]
-
-                      //                                                 curr[0,0,0,0]  copy[0,0,0,0]  id[0,]
-                      //                                                       [0,0,0]         j
-                      //    
-                                                                       
-                         if(indexData.length===0){
-                            indexData.push(currTotalForEachPlayers.indexOf(copy1[j]));
-                      //      console.log(1,indexData);
-                         }
-                         else if(indexData.length!==0){
-                            let temp=currTotalForEachPlayers.indexOf(copy1[j]);
-                            let tempCurrTotalForEachPlayers=currTotalForEachPlayers.slice(temp);
-
-                                while(temp<playerNames.length){
-                                    console.log('while',indexData.indexOf(tempCurrTotalForEachPlayers.indexOf(copy1[j])+temp));
-                                if(indexData.indexOf(tempCurrTotalForEachPlayers.indexOf(copy1[j])+temp)===-1){
-                                    console.log('while if',indexData.indexOf(tempCurrTotalForEachPlayers.indexOf(copy1[j])+temp));
-                                    indexData.push(tempCurrTotalForEachPlayers.indexOf(copy1[j])+temp);
-                      //              console.log(1.5,temp,indexData);
-                                    break;
-                                }
-                                else{
-                                    temp++;
-                                    tempCurrTotalForEachPlayers=currTotalForEachPlayers.slice(temp);
-
-                                    console.log('while else',tempCurrTotalForEachPlayers,temp);
-                                }
-                                
-                            }
-                            console.log('after while',tempCurrTotalForEachPlayers);
-                      //      console.log(2,indexData);
-                         }
-
-
-                        
-                    console.log("==========================================");    
-
-
-
+                     for (let j = initial; j < copy1.length; j++)
+                    {
+                        indexData.push(currTotalForEachPlayers.indexOf(copy1[j]));
                     }
-                   // console.log(3,indexData);
                     for(j=indexData.length-1,k=1;j>=initial;j--,k++)
                     {
                         
@@ -327,19 +280,15 @@ $(playersPositionG[initial]).animate
                                     if(!distribution){
                                     
                                     scaleX=currTotalForEachPlayers[indexData[j]]/userFirstStartingData;
-                                 //   console.log(1,"scaleX",scaleX,`currTotalForEachPlayers[${indexData[j]}]`,currTotalForEachPlayers[indexData[j]],"userFirstStartingData",userFirstStartingData);
                                     }
                                     else{
                                     if(j===indexData.length-1){
                                         scaleX=1;
-                                //        console.log(2,"scaleX",scaleX,`currTotalForEachPlayers[${indexData[j]}]`,currTotalForEachPlayers[indexData[j]]);
                                     }
                                     else{
                                     scaleX=((1/currTotalForEachPlayers[indexData[indexData.length-1]])*currTotalForEachPlayers[indexData[j]]);
-                                 //   console.log(3,"scaleX",scaleX,`currTotalForEachPlayers[${indexData[indexData.length-1]}]`,currTotalForEachPlayers[indexData[indexData.length-1]],`currTotalForEachPlayers[${indexData[j]}]`,currTotalForEachPlayers[indexData[j]]);
                                     }
                                     }
-                                   
 
                                    
                                      if(distribution)
@@ -489,7 +438,7 @@ $(playersPositionG[initial]).animate
                                     
                                     }
 
-                                else if(beforePosition[indexData[j]]===neededToFit)
+                                else
                                     
                                     {
                                        
@@ -523,20 +472,13 @@ $(playersPositionG[initial]).animate
 
                                animeCalculatedStartingPositionForEach[indexData[j]]=now;
 
-                              
-
                                 let totalTranslateAndScale=playersPositionG[indexData[j]].getAttribute('transform').split(" ");
-
-                                
                      
                                 let onlyTranslate=totalTranslateAndScale[initial];
                           
                                 beforePosition[indexData[j]]=onlyTranslate.slice(14,-1);
     
                                 beforePosition[indexData[j]]=parseFloat(beforePosition[indexData[j]]);
-
-                               
-
 
                                 beforeTextYPosition[indexData[j]]=parseFloat(text[indexData[j]].getAttribute('y'));
 
@@ -549,7 +491,7 @@ $(playersPositionG[initial]).animate
                     }
                         
                     
-                 //   console.log("============================================================================");
+                    
                     
                 }
                 else{
