@@ -193,10 +193,10 @@ var svgTextLineLocator=initial;
 
 
 //on which user thought of seeing who reached the data first
-var userFirstStartingData=parseInt(window.prompt("Enter starting value for animation"));
+var userFirstStartingData=50//parseInt(window.prompt("Enter starting value for animation"));
 
 //this is for regular interval 
-var userIntervalData=parseInt(window.prompt("on what interval you want to graph to be plotted"));
+var userIntervalData=50//parseInt(window.prompt("on what interval you want to graph to be plotted"));
 
 var lastHighestGoal=Object.values(goals[goals.length-1])[initial].sort((a,b)=> b-a)[initial];
 
